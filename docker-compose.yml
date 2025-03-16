@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./roman-numeral-frontend-app
+    container_name: react-app
+    ports:
+      - "80:80"
+    networks:
+      - monitoring
+
+  spring-app:
+    build: ./roman-numeral-backend-app
+    container_name: spring-boot-app
+    ports:
+      - "8080:8080"
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./roman-numeral-backend-app/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - monitoring
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686" # UI
+      - "14268:14268" # Data ingestion
+      - "14250:14250"
+      - "4317:4317"
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+      - COLLECTOR_OTLP_ENABLED=true # Enable OTLP support
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
