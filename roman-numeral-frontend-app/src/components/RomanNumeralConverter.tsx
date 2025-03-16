@@ -17,7 +17,6 @@ const romanNumeralConverterLocale = {
   enterNumberLabel: "Enter a number",
   convertButtonText: "Convert to roman numeral",
   romanNumeralLabel: "Roman numeral:",
-  invalidNumberMessage: "Please enter a number between 1 and 3999",
 };
 
 const MAX_NUMBER = 4000;
@@ -27,8 +26,9 @@ export const RomanNumeralConverter: React.FC = () => {
   const [inputNumber, setInputNumber] = useState("");
   const [romanNumeral, setRomanNumeral] = useState("");
 
+  // if the value is decimal or not in between 0 and 4000 it returns
   const handleConvert = async () => {
-    if (Number(inputNumber) < MIN_NUMBER || Number(inputNumber) > MAX_NUMBER) {
+    if ( Number(inputNumber) < MIN_NUMBER || Number(inputNumber) > MAX_NUMBER) {
       return;
     }
     try {
@@ -38,12 +38,14 @@ export const RomanNumeralConverter: React.FC = () => {
       Logger.error(err);
     }
   };
-
+// when on input change if its 
+// 1)between MIN and MAX 
+// 2)not decimal only Integer
   const onInputChange = (value: string) => {
     setRomanNumeral("");
     if (
       value == "" ||
-      (Number(value) > MIN_NUMBER && Number(value) < MAX_NUMBER)
+      (Number(value) > MIN_NUMBER && Number(value) < MAX_NUMBER && Number.isInteger(Number(value)))
     ) {
       setInputNumber(value);
     }
