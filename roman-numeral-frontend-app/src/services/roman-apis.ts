@@ -4,7 +4,7 @@ type RomanNumeralResponse = {
   output: string;
 };
 
-const apiUrl = import.meta.env.VITE_API_URL; // where is this coming from
+const apiUrl = import.meta.env.VITE_API_URL;  // This is taken from ENV environments file
 
 /**
  *
