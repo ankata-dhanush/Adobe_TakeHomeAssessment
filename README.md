@@ -86,7 +86,7 @@ OBSERVABILITY
     This application implements three pillars of Observability:
     1) Logging:
         - Logs are implemnted using SLF4J with Logback, Log pattern includes Date, trace Id, Span Id, Severity Level, Logger, Msg, on new line
-        - Logs are printed on the consol and stored in a log file for review
+        - Logs are printed on the consol and stored in a log file this file will be available under SpringBoot container files tab --> under log folder.
         - Implemented Rollback Policy when max size of each file to store logs is 1MB, Max Cap to store all files is 10MB then fresh logging starts, only last 30 Log files are kept rest is deleted
 
     2) Metrics:
@@ -101,6 +101,7 @@ OBSERVABILITY
 TESTING
 
     -Backend: REST API validation and Unit Test is performed using JUnit and Mockito
+    -Frontend: Validating front end but only giving input as integers rest all won't be accepted. Responsive layout tested on mobile app.
 
                 To run the test manually
                     cd roman-numeral-backend-app
