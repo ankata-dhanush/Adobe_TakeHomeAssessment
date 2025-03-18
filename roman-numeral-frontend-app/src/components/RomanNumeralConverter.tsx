@@ -32,7 +32,7 @@ export const RomanNumeralConverter: React.FC = () => {
       return;
     }
     try {
-      const romanNumber = await getRomanNumeral(inputNumber);
+      const romanNumber = await getRomanNumeral(inputNumber); // this function will make a call to API and fetch the roman number
       setRomanNumeral(romanNumber);
     } catch (err) {
       Logger.error(err);

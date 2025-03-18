@@ -19,6 +19,7 @@ export const getRomanNumeral = async (inputNum: string): Promise<string> => {
     return data.output;
   } catch (error) {
     Logger.error("Error fetching Roman numeral:", error);
+    alert("Service is currently down, please wait for a while") // When the backend server is down then we throw this alert.
     return "";
   }
 };
